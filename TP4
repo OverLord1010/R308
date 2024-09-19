@@ -1,0 +1,55 @@
+class Heure:
+    def __init__(self,H,M):
+        self.heure=H
+        self.minute=M
+
+    def StringToString(self):
+        H=f'{self.heure}'
+        M=f'{self.minute}'
+        print(H,"h",M,"min")
+
+    def CompareTo(self,Val2):
+        if self.heure==Val2.heure:
+            if self.minute<Val2.minute:
+                res=-1
+            elif self.minute==Val2.minute:
+                res=0
+            else:
+                res=1
+        elif self.heure<Val2.heure:
+            res=-1
+        else:
+            res=1
+        print(res)
+
+class Horaire:
+    def __init__(self,D,F):
+        self.début=D
+        self.fin=F
+
+    def ConflictWith(self,C2):
+        D=self.début
+        F=self.fin
+        if D.CompareTo(C2.début)==1 and D.CompareTo(C2.fin)==-1:
+            res=True
+        elif F.CompareTo(C2.début)==1 and F.CompareTo(C2.fin)==-1:
+            res=True
+        elif C2.début.CompareTo(D)==1 and C2.début.CompareTo(F)==-1:
+            res=True
+        elif C2.fin.CompareTo(D)==1 and C2.fin.CompareTo(F)==-1:
+            res=True
+        else:
+            res=False
+        print(res)
+
+H1=Heure(8,0)
+H3=Heure(11,0)
+H2=Heure(9,30)
+H4=Heure(12,30)
+
+Creaneau1=Horaire(H1,H3)
+Creaneau2=Horaire(H2,H4)
+
+H1.StringToString()
+H1.CompareTo(H2)
+Creaneau1.ConflictWith(Creaneau2)

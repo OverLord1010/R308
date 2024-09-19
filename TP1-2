@@ -1,0 +1,142 @@
+'''notesMMac=[]
+coeffnotesMMac=[]
+MMac=['Mac','Manu',notesMMac,coeffnotesMMac]
+
+notesMVal=[]
+coeffnotesMVal=[]
+MVal=['Vallessss','Manu',notesMVal,coeffnotesMVal]
+
+notesMMun=[]
+coeffnotesMMun=[]
+MMain=['Main','Manu',notesMMun,coeffnotesMMun]
+
+Promo2021=[]
+PromoAVANT=[]
+
+def main():
+    FGuy={}
+    FGuy['nom']='Guy'
+    FGuy['prenom']='French'
+
+
+# ===
+# Ex3
+# ===
+
+def NewNotes(Etudiant,Note,Coeff):
+    Etudiant[2].append(Note)
+    Etudiant[3].append(Coeff)
+
+def NbNotes(Etudiant):
+    print(len(Etudiant[2]))
+
+def Moyenne(Etudiant):
+    tot=0
+    totcoeff=0
+    for i in range(len(Etudiant[2])):
+        tot=tot+Etudiant[2][i]*Etudiant[3][i]
+        totcoeff+=Etudiant[3][i]
+    tot=tot//totcoeff
+    print(tot)
+    return tot
+
+NewNotes(MMac,5,9)
+NewNotes(MMac,15,9)
+NewNotes(MVal,0,10)
+NewNotes(MVal,20,10)
+NbNotes(MMac)
+
+Moyenne(MMac)
+Moyenne(MVal)
+
+
+# ===
+# Ex 4
+# ===
+
+def InPromo(Promo,Etudiant):
+    Promo.append(Etudiant)
+    return Promo
+
+def NbPromo(Promo):
+    print(len(Promo))
+
+def CalculMoyennePromo(Promo):
+    tot=0
+    for elt in Promo:
+        tot+=Moyenne(elt)
+    tot=tot/len(Promo)
+    print(tot)
+
+InPromo(Promo2021,MMac)
+InPromo(Promo2021,MVal)
+NbPromo(Promo2021)
+
+CalculMoyennePromo(Promo2021)
+'''
+# ===
+# POO
+# ===
+
+class Etudiant:
+    def __init__(self,Nom,Prenom,Notes):
+        self.nom=Nom
+        self.prenom=Prenom
+        self.notes=Notes
+
+    def NewNote(self,Note,Coeff):
+        New=Notes(Note,Coeff)
+        self.notes.append(New)
+    
+    def NbNotes(self):
+        print(len(self.notes))
+    
+    def Moyenne(self):
+        tot=0
+        totcoeff=0
+        for i in range(len(self.notes)):
+            tot=tot+self.notes[i].note*self.notes[i].coeff
+            totcoeff+=self.notes[i].coeff
+        tot=tot/totcoeff
+        return tot
+
+class Promo:
+    def __init__(self):
+        self.etud=[]
+
+    def NewEtud(self,Etudiant):
+        self.etud.append(Etudiant)
+
+    def NbEtud(self):
+        print(len(self.etud))
+
+    def MoyennePromo(self):
+        tot=0
+        for elt in self.etud:
+            if len(elt.notes)==0:
+                print()
+            else:
+                tot+=elt.Moyenne()
+        tot=tot/len(self.etud)
+        print(tot)
+        return tot
+
+class Notes:
+    def __init__(self, Note, Coeff):
+        self.note=Note
+        self.coeff=Coeff
+
+EPh=Etudiant('Phiphi','Edouard',[])
+EPh.NewNote(6,2)
+EPh.NewNote(19,4)
+EPh.NbNotes()
+EPh.Moyenne()
+
+Promo2023=Promo()
+Promo2023.NewEtud(EPh)
+Promo2023.NbEtud()
+SPa=Etudiant('Pat','Seb',[])
+SPa.NewNote(6,2)
+SPa.NewNote(19,4)
+Promo2023.NewEtud(SPa)
+Promo2023.MoyennePromo()

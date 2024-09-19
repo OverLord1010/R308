@@ -1,0 +1,98 @@
+class LinkedList:
+    def __init__(self):
+        self.premier=None
+        
+    def addInHead(self,Val):
+        Node=Element(Val)
+        Node.suiv=self.premier
+        self.premier=Node
+    
+    def addInTail(self,Val):
+        Node=Element(Val)
+        current=self.premier
+        while current.suiv!=None:
+            current=current.suiv
+        current.suiv=Node
+
+    def inList(self):
+        self.premier.printRecRev()
+    
+    def insertIn(self,Val):
+        NewNode=Element(Val)
+        if self.premier==None:
+            self.premier=NewNode
+        elif Val<self.premier.value:
+            NewNode.suiv=self.premier
+            LC.premier=NewNode
+        else:
+            self.premier.insertIn(NewNode)
+
+    def reverse(self):
+        NewList=LinkedList()
+        a=LC.premier
+        NewList.addInHead(a.value)
+        while a.suiv!=None:
+            NewList.addInHead(a.suiv.value)
+            a=a.suiv
+        NewList.inList()
+    
+    def reverseCorrec(self):
+        temp=LinkedList()
+        if self.premier is not None:
+            temp.premier=self.premier.reverseListCorrec(temp.premier)
+        return temp
+
+# =====
+
+class Element:
+    def __init__(self,value):
+        self.value=value
+        self.suiv=None
+
+    def printRecRev(self):
+        if self.suiv==None:
+            print(self.value)
+            return self.value
+        else:
+            self.suiv.printRecRev()
+            print(self.value)
+        
+    def insertIn(self,NewNode):
+        if self.suiv==None:
+            self.suiv=NewNode
+        elif self.suiv.value>NewNode.value:
+            NewNode.suiv=self.suiv
+            self.suiv=NewNode
+        else:
+            return self.suiv.insertIn(NewNode)
+    
+    def reverseListCorrec(self,Node):
+        tmp=Element(self.value)
+        tmp.suiv=Node
+        if self.suiv is not None:
+            tmp=self.suiv.reverseListCorrec(tmp)
+        return tmp
+    
+             
+
+
+
+        
+N1=Element(1)
+N2=Element(2)
+N3=Element(4)
+LC=LinkedList()
+LC.premier=N1
+N1.suiv=N2
+N2.suiv=N3
+
+LC.insertIn(3)
+
+LC.addInHead(0.5)
+LC.addInTail(8)
+#LC.inList()
+
+#LC.reverse()
+
+a=LC.reverseCorrec()
+a.inList()
